@@ -14,32 +14,38 @@
       font-family: sans-serif;
       text-align: center;
     }
+    .button {
+      margin-top: 2rem;
+      padding: 12px 20px;
+      font-size: 16px;
+      background-color: #317EFB;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
     iframe {
+      display: none;
       width: 100%;
       height: 90vh;
       border: none;
     }
-    .fallback {
-      margin-top: 1rem;
-      font-size: 1rem;
-      color: #555;
-    }
   </style>
 </head>
 <body>
-  <h1>Loading Apidog...</h1>
+  <h1>Apidog PWA</h1>
+  <p>Click the button below to open your Apidog team dashboard:</p>
 
-  <iframe 
-    id="apidog-frame" 
-    src="https://app.apidog.com/main/teams/252685?tab=project" 
-    onerror="document.getElementById('fallback').style.display='block';">
-  </iframe>
+  <button class="button" onclick="openApidog()">Open Apidog</button>
 
-  <div id="fallback" class="fallback" style="display: none;">
-    <p>⚠️ If the page didn’t load, <a href="https://app.apidog.com/main/teams/252685?tab=project" target="_blank" rel="noopener">click here to open Apidog</a>.</p>
-  </div>
+  <iframe id="apidog-frame" src=""></iframe>
 
   <script>
+    function openApidog() {
+      const targetUrl = "https://app.apidog.com/main/teams/252685?tab=project";
+      window.open(targetUrl, '_blank');
+    }
+
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('service-worker.js')
         .then(() => console.log('Service Worker registered'))
